@@ -17,9 +17,12 @@ from __future__ import annotations
 from collections.abc import Callable
 from functools import partial
 
+import ibis
+
 from mplang.core import primitive as prim
 from mplang.core.base import Mask, MPObject, Rank, ScalarType, Shape, TensorLike
 from mplang.core.pfunc import PFunction
+from mplang.plib import ibis_fe
 
 
 def prank() -> MPObject:
@@ -106,3 +109,16 @@ def pshfl(src: MPObject, index: MPObject) -> MPObject:
 
 def pconv(vars: list[MPObject]) -> MPObject:
     return prim.pconv(vars)
+
+
+def prun_ibis(
+    out_tbl_expr: ibis.Table, in_tbl: MPObject, pmask: Mask | None = None
+) -> MPObject:
+    assert "schema" in in_tbl.attrs
+    in_schema: ibis.Schema = in_tbl.attrs["schema"]
+    pfn = ibis_fe.compile(out_tbl_expr, in_schema)
+    res = prim.peval(pfn, [in_tbl], pmask)
+    assert len(res) == 1
+    out = res[0]
+    out.attrs["schema"] = out_tbl_expr.schema()
+    return out
