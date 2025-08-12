@@ -1,6 +1,7 @@
 # MPLang: Multi-Party Programming Language
 
-[![CircleCI](https://img.shields.io/circleci/build/gh/secretflow/mplang/main?logo=circleci)](https://app.circleci.com/pipelines/github/secretflow/mplang?branch=main)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/secretflow/mplang/tree/main.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/gh/secretflow/mplang/tree/main)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/secretflow/mplang/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/secretflow/mplang/tree/main)
 
 
 MPLang (Multi-Party Language) is a single-controller programming library for multi-party and multi-device workloads. It follows the SPMD (Single Program, Multiple Data) model, where one Python program orchestrates multiple parties and devices (e.g., P0/P1/SPU) with explicit security domains. Programs are compilable and auditable, and can run in local simulation or on secure-computation backends.
